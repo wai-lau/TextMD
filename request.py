@@ -4,7 +4,7 @@ from conversation import ask, backdoor
 from flask_cors import CORS, cross_origin
 from sms import send_sms
 import re
-from database import get_from_db
+from database import get_doc_ready_json
 
 success = json.dumps({'success':True}), 200, {'ContentType':'application/json'}
 fail = json.dumps({'success':False}), 500, {'ContentType':'application/json'}
@@ -29,9 +29,12 @@ def receive_sms():
     send_sms(watson_response, number)
     return success
 
-@app.route('/test', methods=['GET'])
-def test():
-    return success
+@app.route('/patients/<category>', methods=['GET'])
+def getPatients(category):
+    print category
+    haha = get_doc_ready_json(str(category))
+    print haha
+    return haha
 
 if __name__ == '__main__':
     app.run()

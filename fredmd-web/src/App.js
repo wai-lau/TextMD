@@ -9,77 +9,105 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      patients: [],
+      patients: [
+        {
+          id: uuid.v4(),
+          name: "Kevin",
+          age: 22,
+          sex: "Male",
+          category: "Healthy",
+          description: "React, and the overall everything guy also i am a god"
+        },
+        {
+          id: uuid.v4(),
+          name: "Wai Lun",
+          age: 22,
+          sex: "Male",
+          category: "Cold",
+          description: "Docker"
+        },
+        {
+          id: uuid.v4(),
+          name: "Fredric",
+          age: 22,
+          sex: "Male",
+          category: "Undefined",
+          description: "Watson"
+        }
+      ],
       title: "Patients",
-      categoryList: ["Cardio", "Eye", "Muscle"]
+      categoryList: ["cardio", "bone", "Impacts"]
     }
   }
 
   getPatients() {
-    this.setState({patients: [
-      {
-        id: uuid.v4(),
-        name: "Kevin",
-        age: 22,
-        sex: "Male",
-        category: "Healthy",
-        description: "React, and the overall everything guy also i am a god"
-      },
-      {
-        id: uuid.v4(),
-        name: "Wai Lun",
-        age: 22,
-        sex: "Male",
-        category: "Cold",
-        description: "Docker"
-      },
-      {
-        id: uuid.v4(),
-        name: "Fredric",
-        age: 22,
-        sex: "Male",
-        category: "Undefined",
-        description: "Watson"
-      }
-    ]});
-  }
-
-  componentWillMount(){
-    this.getPatients();
-    console.log(this.state.categoryList[0]);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.location !== this.props.location) {
-      this.setState({ prevPath: this.props.location })
-      console.log(this.props.location.state)
-      if (this.props.location.state) {
-        let patients = this.state.patients;
-        let idToDelete = this.props.location.state.id;
-        let index = patients.findIndex(x => x.id === idToDelete);
-        patients.splice(index, 1);
-        this.setState({patients: patients});
-      }
-    }
-  }
-
-  componentDidMount() {
+    let url = 'http://localhost:8080/patients/' + this.state.categoryList[0];
     $.ajax({
-      url: 'http://localhost:8080/test',
+      url: url,
       cache: false,
       success: function(data){
           console.log(data);
-      },
+          data = JSON.parse(data);
+          let patients = [];
+          for (let p in data) {
+            console.log(data[p]);
+            let person = data[p];
+            let toAdd = {
+              id: p,
+              name: person.user_info.name,
+              age: person.user_info.age,
+              sex: person.user_info.sex,
+              category: person.category,
+              description: "YOLO"
+            }
+            patients.push(toAdd);
+          }
+          this.setState({patients: patients })
+      }.bind(this),
       error: function(xhr, status, err){
         console.error(err);
       }
     });
   }
 
-  handleCatChange(e) {
-    console.log(e.target.value);
+  componentWillMount(){
+    this.getPatients();
   }
 
+  componentDidMount() {
+    
+  }
+
+  handleCatChange(e) {
+    console.log(e.target.value);
+    let url = 'http://localhost:8080/patients/' + e.target.value;
+    $.ajax({
+      url: url,
+      cache: false,
+      success: function(data){
+          console.log(data);
+          data = JSON.parse(data);
+          let patients = [];
+          for (let p in data) {
+            console.log(data[p]);
+            let person = data[p];
+            let toAdd = {
+              id: p,
+              name: person.user_info.name,
+              age: person.user_info.age,
+              sex: person.user_info.sex,
+              category: person.category,
+              description: "YOLO"
+            }
+            patients.push(toAdd);
+          }
+          this.setState({patients: patients })
+      }.bind(this),
+      error: function(xhr, status, err){
+        console.error(err);
+      }
+    });
+  }
   render() {
     let categories = this.state.categoryList.map(category => {
       // console.log(category);
