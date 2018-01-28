@@ -1,0 +1,16 @@
+twilio pw
+fredriclamisreal
+
+watson
+fredric.lam@mail.mcgill.ca
+conuhacks2018
+
+install cf cli
+sudo apt-get install cf-cli
+
+python sample
+git clone https://github.com/IBM-Bluemix/get-started-python
+
+ngrok
+http://blog.benhall.me.uk/2015/01/tunnelling-docker-container-using-ngrok/
+
