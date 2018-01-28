@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PatientItem from './PatientItem';
 
 class Patients extends Component {
+
     render() {
         let patientItems;
         if(this.props.patients) {

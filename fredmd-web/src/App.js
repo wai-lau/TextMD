@@ -21,21 +21,24 @@ class App extends Component {
         name: "Kevin",
         age: 22,
         sex: "Male",
-        category: "Healthy"
+        category: "Healthy",
+        description: "React"
       },
       {
         id: uuid.v4(),
         name: "Wai Lun",
         age: 22,
         sex: "Male",
-        category: "Cold"
+        category: "Cold",
+        description: "Docker"
       },
       {
         id: uuid.v4(),
         name: "Fredric",
         age: 22,
         sex: "Male",
-        category: "Undefined"
+        category: "Undefined",
+        description: "Watson"
       }
     ]});
   }
@@ -72,9 +75,9 @@ class App extends Component {
           <div className="panel panel-primary">
             <div className="panel-heading patientHeader">
               <h4>{this.state.title}</h4>
-              <div class="input-group">
-                <label for="category">Select category:</label>
-                <select class="form-control" id="category">
+              <div className="input-group">
+                <label>Select category:</label>
+                <select className="form-control" id="category">
                   <option>1</option>
                   <option>2</option>
                   <option>3</option>
