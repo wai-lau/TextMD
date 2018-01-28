@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
 import './Login.css';
 import { withRouter} from 'react-router-dom';
 

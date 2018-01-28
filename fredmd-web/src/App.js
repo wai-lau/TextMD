@@ -82,12 +82,28 @@ class App extends Component {
     });
   }
 
+  checkLogin() {
+    if (localStorage.getItem("token") !== "ONEOKPPAP") {
+      this.props.history.push({
+        pathname: '/login'
+      })
+    }
+  }
+
+  logout() {
+    localStorage.removeItem("token");
+    this.props.history.push({
+        pathname: '/login'
+    });
+    
+  }
+
   componentWillMount(){
     this.getCategories();
   }
 
   componentDidMount() {
-
+    this.checkLogin();
   }
 
   handleCatChange(e) {
@@ -153,7 +169,7 @@ class App extends Component {
           </div>    
         </div>
         <div className="row">
-
+        <button className="btn btn-danger" onClick={this.logout.bind(this)}>Logout</button>
         </div>
 
       </div>
