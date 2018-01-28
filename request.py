@@ -22,7 +22,7 @@ def receive_sms():
     number = re.sub(r'[^\d]','',request.form['From'])
     message_body = request.form['Body']
     message = re.sub(r'\s',' ',message_body).encode("utf-8")
-    if 'forget me' in str(message).lower():
+    if 'forget me' in str(message).lower() or 'forget it' in str(message).lower():
         backdoor(number)
         remove(number)
         watson_response = "Okay, I've forgotten you. I look forward to meeting you again."

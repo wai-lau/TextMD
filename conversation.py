@@ -25,6 +25,9 @@ def ask(message, number):
     else:
         context = contexts[number]
     print("{}: {}".format(number, message))
+    data = database.get_from_db(number)
+    if data and 'doc_ready' in data and data['doc_ready'] and 'description' in data:
+        message = message + data['description']
     response = conversation.message(
       workspace_id = workspace_id,
       input = {'text': message},
