@@ -1,5 +1,5 @@
 .App {
-  background-color: rgb(194, 140, 140);
+  background-color: rgb(164, 165, 168);
 }
 
 .App-logo {
@@ -12,6 +12,7 @@
   height: 150px;
   padding: 20px;
   color: white;
+  border-radius: 5px;
 }
 
 .App-title {
@@ -25,4 +26,17 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+tr {
+  width: 33%;
+}
+
+.App-header {
+  text-align: center;
+}
+
+thead {
+  color: rgb(197, 58, 58);
+  border-style: outset;
 }

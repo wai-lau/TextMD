@@ -13,7 +13,18 @@ class Patients extends Component {
         }
         return (
             <div className="Patients">
+                <table className="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
                 {patientItems}
+                </tbody>
+                </table>
             </div>
         );
     }

@@ -4,9 +4,11 @@ class PatientItem extends Component {
 
     render() {
         return (
-            <li className="Patient">
-                <strong>{this.props.patient.name}</strong>: {this.props.patient.category}
-            </li>
+            <tr className="Patient">
+                <td><strong>{this.props.patient.name}</strong></td>
+                <td>{this.props.patient.category}</td>
+                <td><button className="btn btn-success">Respond</button></td>
+            </tr>
         );
     }
 }
