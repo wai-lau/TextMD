@@ -4,6 +4,7 @@ import datetime
 from flask import Flask, render_template, request, abort
 from twilio.rest import Client
 from conversation import ask
+from flask_cors import CORS, cross_origin
 
 # Find these values at https://twilio.com/user/account
 account_sid = "AC625b5404f523c1779b80dee9ce29c792"
@@ -13,6 +14,7 @@ fail = json.dumps({'success':False}), 500, {'ContentType':'application/json'}
 client = Client(account_sid, auth_token)
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 def main():
@@ -28,6 +30,10 @@ def sms():
         to=number,
         from_="+15149000472",
         body=watson_response)
+    return success
+
+@app.route('/test', methods=['GET'])
+def test():
     return success
 
 if __name__ == '__main__':

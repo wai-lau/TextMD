@@ -4,5 +4,6 @@
 #EXPOSE 8888
 
 FROM fredmd-web
+WORKDIR /fredmd/fredmd-web
 CMD yarn install && yarn start
 

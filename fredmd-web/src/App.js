@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Patients from './Components/Patients';
 import uuid from 'uuid';
+import $ from 'jquery';
 import { Grid, Row, Col } from 'react-bootstrap';
 
 class App extends Component {
@@ -44,7 +45,16 @@ class App extends Component {
   }
 
   componentDidMount() {
-
+    $.ajax({
+      url: 'http://localhost:8080/test',
+      cache: false,
+      success: function(data){
+          console.log(data);
+      },
+      error: function(xhr, status, err){
+        console.error(err);
+      }
+    });
   }
 
   render() {
