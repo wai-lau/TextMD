@@ -13,6 +13,10 @@ conversation = watson_developer_cloud.ConversationV1(
 
 contexts = {}
 
+def backdoor(number):
+    if number in contexts:
+        del contexts[number]
+
 def ask(message, number):
     if number not in contexts:
         print("new convo")
