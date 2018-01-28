@@ -5,7 +5,7 @@ from flask_cors import CORS, cross_origin
 from sms import send_sms
 from database import remove, doc_unready
 import re
-from database import get_doc_ready_json
+from database import get_doc_ready_json, get_categories
 
 success = json.dumps({'success':True}), 200, {'ContentType':'application/json'}
 fail = json.dumps({'success':False}), 500, {'ContentType':'application/json'}
@@ -42,6 +42,10 @@ def response():
     send_sms(response, number)
     doc_unready(number)
     return success
+
+@app.route('/categories', methods=['GET'])
+def categories():
+    return get_categories()
 
 if __name__ == '__main__':
     app.run()

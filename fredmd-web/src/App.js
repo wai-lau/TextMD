@@ -36,8 +36,36 @@ class App extends Component {
         }
       ],
       title: "Patients",
-      categoryList: ["cardio", "bone", "Impacts"]
+      categoryList: ["cardio", "bone", "Impacts"],
+      categoryListCap: ["Cardio", "Bone", "Impacts"]
     }
+  }
+
+  getCategories() {
+    $.ajax({
+      url: 'http://localhost:8080/categories',
+      cache: false,
+      success: function(data){
+          console.log(data);
+          data = JSON.parse(data);
+          let categories = [];
+          let categoriesCap = [];
+          for (let c in data) {
+            categories.push(data[c]);
+            let temp = data[c].charAt(0).toUpperCase() + data[c].substr(1);
+            categoriesCap.push(temp);
+          }
+          this.setState({categoryList: categories, categoryListCap: categoriesCap })
+      }.bind(this),
+      error: function(xhr, status, err){
+        console.error(err);
+      }
+    });
+  }
+
+  findCategory(c) {
+    let ind1 = this.state.categoryListCap.findIndex(x => x === c);
+    return this.state.categoryList[ind1];
   }
 
   getPatients() {
@@ -50,7 +78,6 @@ class App extends Component {
           data = JSON.parse(data);
           let patients = [];
           for (let p in data) {
-            console.log(data[p]);
             let person = data[p];
             let toAdd = {
               id: p,
@@ -71,16 +98,17 @@ class App extends Component {
   }
 
   componentWillMount(){
+    this.getCategories();
     this.getPatients();
   }
 
   componentDidMount() {
-    
+
   }
 
   handleCatChange(e) {
     console.log(e.target.value);
-    let url = 'http://localhost:8080/patients/' + e.target.value;
+    let url = 'http://localhost:8080/patients/' + this.findCategory(e.target.value);
     $.ajax({
       url: url,
       cache: false,
@@ -89,7 +117,6 @@ class App extends Component {
           data = JSON.parse(data);
           let patients = [];
           for (let p in data) {
-            console.log(data[p]);
             let person = data[p];
             let toAdd = {
               id: p,
@@ -109,10 +136,10 @@ class App extends Component {
     });
   }
   render() {
-    let categories = this.state.categoryList.map(category => {
+    let categories = this.state.categoryListCap.map(category => {
       // console.log(category);
       return (
-          <option key={category}>{category}</option>
+          <option key={category} value={category}>{category}</option>
       );
     });
     return (

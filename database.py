@@ -64,4 +64,4 @@ def get_categories():
     query = []
     for n in categories:
         query.append(categories[n]['category'])
-    return query
+    return json.dumps(list(set(query)))

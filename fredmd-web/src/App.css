@@ -40,3 +40,7 @@ thead {
   color: rgb(197, 58, 58);
   border-style: outset;
 }
+
+.category:first-letter {
+  text-transform: capitalize;
+}
