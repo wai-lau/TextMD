@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
 class PatientItem extends Component {
-    constructor(props) {
-        super(props);
-    }
-    
+
     goToPage(){
         // console.log(this.props.patient);
         this.props.history.push({

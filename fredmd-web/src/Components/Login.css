@@ -1,0 +1,30 @@
+.LoginPage {
+    background-color: rgb(164, 165, 168);
+  }
+  
+.Login-header {
+    background-color: #222;
+    height: 150px;
+    padding: 20px;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .Login-title {
+    font-size: 1.5em;
+  }
+
+  #cancel {
+      margin-left: 10px;
+      margin-right: 10px;
+  }
+
+  .login-body {
+      background-color: white;
+  }
+
+  #login-submit {
+      margin-left: 10px;
+      margin-right: 10px;
+  }

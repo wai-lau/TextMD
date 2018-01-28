@@ -16,28 +16,12 @@ class App extends Component {
           age: 22,
           sex: "Male",
           category: "Healthy",
-          description: "React, and the overall everything guy also i am a god"
-        },
-        {
-          id: uuid.v4(),
-          name: "Wai Lun",
-          age: 22,
-          sex: "Male",
-          category: "Cold",
-          description: "Docker"
-        },
-        {
-          id: uuid.v4(),
-          name: "Fredric",
-          age: 22,
-          sex: "Male",
-          category: "Undefined",
-          description: "Watson"
+          description: "React"
         }
       ],
       title: "Patients",
-      categoryList: ["cardio", "bone", "Impacts"],
-      categoryListCap: ["Cardio", "Bone", "Impacts"]
+      categoryList: ["cardio"],
+      categoryListCap: ["Cardio"]
     }
   }
 
@@ -55,7 +39,8 @@ class App extends Component {
             let temp = data[c].charAt(0).toUpperCase() + data[c].substr(1);
             categoriesCap.push(temp);
           }
-          this.setState({categoryList: categories, categoryListCap: categoriesCap })
+          this.setState({categoryList: categories, categoryListCap: categoriesCap });
+          this.getPatients();
       }.bind(this),
       error: function(xhr, status, err){
         console.error(err);
@@ -99,7 +84,6 @@ class App extends Component {
 
   componentWillMount(){
     this.getCategories();
-    this.getPatients();
   }
 
   componentDidMount() {
@@ -168,6 +152,10 @@ class App extends Component {
             </div>
           </div>    
         </div>
+        <div className="row">
+
+        </div>
+
       </div>
 
       </div>

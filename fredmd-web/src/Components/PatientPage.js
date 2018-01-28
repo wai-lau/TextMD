@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import './PatientPage.css';
-import { withRouter, Link} from 'react-router-dom';
+import { withRouter} from 'react-router-dom';
 
 class PatientPage extends Component {
   constructor() {
@@ -40,7 +40,7 @@ class PatientPage extends Component {
             contentType: 'application/json',
             url: 'http://localhost:8080/response',
             cache: false,
-            data: '{"response": "' + this.refs.response.value + '", "id" : "' + this.state.patient.id + '"}',
+            data: '{"response": "' + this.refs.response.value.replace(/\s/g,' ') + '", "id" : "' + this.state.patient.id + '"}',
             success: function(data){
                 console.log(data);
                 this.props.history.push({
@@ -59,6 +59,12 @@ class PatientPage extends Component {
     }
     e.preventDefault();
     
+   }
+
+   handleCancel(e) {
+    this.props.history.push({
+      pathname: '/'
+    });
    }
 
 
@@ -97,7 +103,7 @@ class PatientPage extends Component {
                     <textarea className="form-control" rows="5" id="response" ref="response"></textarea>
                 </div>
                 <div className="btn-group">
-                    <Link to="/"><button className="btn btn-danger" id="cancel" >Cancel</button></Link>
+                    <button className="btn btn-danger" id="cancel" onClick={this.handleCancel.bind(this)}>Cancel</button>
                     <button className="btn btn-success" onClick={this.handleSubmit.bind(this)}>Submit</button>
                 </div>
             
