@@ -30,9 +30,8 @@ def ask(message, number):
       input = {'text': message},
       context = context
     )
-    # print(response['context'])
     if 'doc_ready' in response['context'] and response['context']['doc_ready']:
-        database.put_in_db(number, response['context'], response['context'])
+        database.put_in_db(number, response['context'], response['input']['text'])
         print("added new entry to database")
     context = response['context']
     contexts[number] = context

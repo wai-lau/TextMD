@@ -54,3 +54,14 @@ def get_doc_ready_json(category):
 
 def add_doc_response(number, response):
     db.child("patients").child(number).child('doc_response').set(response, user['idToken'])
+
+def get_categories():
+    categories = db.child("patients")\
+        .order_by_child('doc_ready')\
+        .equal_to(True)\
+        .get(user['idToken'])\
+        .val()
+    query = []
+    for n in categories:
+        query.append(categories[n]['category'])
+    return query
