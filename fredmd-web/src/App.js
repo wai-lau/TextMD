@@ -58,7 +58,7 @@ class App extends Component {
               age: person.user_info.age,
               sex: person.user_info.sex,
               category: person.category,
-              description: "YOLO"
+              description: person.description
             }
             patients.push(toAdd);
           }
@@ -97,7 +97,7 @@ class App extends Component {
               age: person.user_info.age,
               sex: person.user_info.sex,
               category: person.category,
-              description: "YOLO"
+              description: person.description,
             }
             patients.push(toAdd);
           }
