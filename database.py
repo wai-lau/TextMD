@@ -15,10 +15,22 @@ user = auth.sign_in_with_email_and_password("wl.wailau@gmail.com", "fakePass")
 token = user['idToken']
 db = firebase.database()
 
+def remove(number):
+    return db.child("patients").child(number).remove(user['idToken'])
+
 def get_from_db(number):
     return db.child("patients").child(number).get(user['idToken']).val()
 
-def put_in_db(number, entry):
+def put_in_db(number, context):
+    entry = {
+        'user_info': {
+            'name':context['name'],
+            'age':context['age'],
+            'sex':context['sex']
+        },
+        'doc_ready':context['doc_ready'],
+        'category':context['category']
+    }
     db.child("patients").child(number).set(entry, user['idToken'])
 
 def doc_ready(number):
@@ -26,17 +38,6 @@ def doc_ready(number):
 
 def doc_unready(number):
     db.child("patients").child(number).child('doc_ready').set(False, user['idToken'])
-
-fakeId = '4506713133'
-fakeMan = {
-    'user_info': {
-        'name':'Manti Teo',
-        'age':39,
-        'sex':'M'
-    },
-    'doc_ready':True,
-    'category':'LIMIC'
-}
 
 def get_doc_ready_json(category):
     patients = db.child("patients")\
@@ -50,12 +51,5 @@ def get_doc_ready_json(category):
             query[n] = patients[n]
     return json.dumps(query)
 
-# put_in_db(fakeId, fakeMan)
-# print(get_from_db(fakeId))
-# print(get_from_db("fakeId"))
-
-doc_unready('4160386032')
-print(get_doc_ready_json('bone'))
-
-all_agents = db.child("patients").get(user['idToken']).val()
-# pprint.pprint(json.dumps(all_agents))
+def add_doc_response(number, response):
+    db.child("patients").child(number).child('doc_response').set(response, user['idToken'])

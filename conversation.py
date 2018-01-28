@@ -1,5 +1,6 @@
 import watson_developer_cloud
 import re
+import database
 
 username = '5a2ae8b2-0a2d-4ced-a791-f7c75056fa83' # replace with username from service key
 password = 'vzYOeQ8rGhY7' # replace with password from service key
@@ -29,11 +30,13 @@ def ask(message, number):
       input = {'text': message},
       context = context
     )
+    # print(response)
+    if 'doc_ready' in response['context'] and response['context']['doc_ready']:
+        database.put_in_db(number, response['context'])
+        print("added new entry to database")
     context = response['context']
     contexts[number] = context
     try:
-        # print(response)
-        # print(response['doc_ready'])
         print("Watson: " + response['output']['text'][0])
         return response['output']['text'][0]
     except Exception as e:

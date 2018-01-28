@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, abort
 from conversation import ask, backdoor
 from flask_cors import CORS, cross_origin
 from sms import send_sms
+from database import remove
 import re
 
 success = json.dumps({'success':True}), 200, {'ContentType':'application/json'}
@@ -17,11 +18,12 @@ def main():
 
 @app.route('/sms', methods=['POST'])
 def receive_sms():
-    number = request.form['From']
+    number = re.sub(r'[^\d]','',request.form['From'])
     message_body = request.form['Body']
     message = re.sub(r'\s',' ',message_body).encode("utf-8")
     if 'forget me' in str(message).lower():
         backdoor(number)
+        remove(number)
         watson_response = "Okay, I've forgotten you. I look forward to meeting you again."
     else:
         watson_response = ask(message, number)
