@@ -33,8 +33,9 @@ def ask(message, number):
     contexts[number] = context
     try:
         # print(response)
+        # print(response['doc_ready'])
         print("Watson: " + response['output']['text'][0])
         return response['output']['text'][0]
     except Exception as e:
-        print(e)
-        return str(e)
+        print("Error! " + e)
+        return "Error! " + str(e)
