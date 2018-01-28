@@ -4,6 +4,7 @@ from conversation import ask, backdoor
 from flask_cors import CORS, cross_origin
 from sms import send_sms
 import re
+from database import get_from_db
 
 success = json.dumps({'success':True}), 200, {'ContentType':'application/json'}
 fail = json.dumps({'success':False}), 500, {'ContentType':'application/json'}
