@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, abort
 from conversation import ask, backdoor
 from flask_cors import CORS, cross_origin
 from sms import send_sms
-from database import remove
+from database import remove, doc_unready
 import re
 from database import get_doc_ready_json
 
@@ -33,10 +33,15 @@ def receive_sms():
 
 @app.route('/patients/<category>', methods=['GET'])
 def getPatients(category):
-    print category
-    haha = get_doc_ready_json(str(category))
-    print haha
-    return haha
+    return get_doc_ready_json(str(category))
+
+@app.route('/response', methods=['POST'])
+def response():
+    response = request.get_json()['response']
+    number = request.get_json()['id']
+    send_sms(response, number)
+    doc_unready(number)
+    return success
 
 if __name__ == '__main__':
     app.run()

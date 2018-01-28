@@ -35,14 +35,27 @@ class PatientPage extends Component {
     if(this.refs.response.value === '') {
         alert('A response is required');
     } else {
-        console.log(this.refs.response.value);
-        this.props.history.push({
-            pathname: '/',
-            state: {
-              id: this.state.patient.id,
-              response: this.refs.response.value
+        $.ajax({
+            type: "POST",
+            contentType: 'application/json',
+            url: 'http://localhost:8080/response',
+            cache: false,
+            data: '{"response": "' + this.refs.response.value + '", "id" : "' + this.state.patient.id + '"}',
+            success: function(data){
+                console.log(data);
+                this.props.history.push({
+                    pathname: '/',
+                    state: {
+                      id: this.state.patient.id,
+                      response: this.refs.response.value
+                    }
+                })
+            }.bind(this),
+            error: function(xhr, status, err){
+              console.error(err);
             }
-        })
+          });
+        
     }
     e.preventDefault();
     
