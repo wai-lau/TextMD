@@ -5,5 +5,5 @@
 
 FROM fredmd-web
 WORKDIR /fredmd/fredmd-web
-CMD yarn install && yarn start
+CMD cd /fredmd/fredmd-web/TextMD/fredmd-web && yarn install && yarn start
 

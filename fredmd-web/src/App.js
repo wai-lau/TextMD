@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import logo from './logo.jpg';
 import './App.css';
 import Patients from './Components/Patients';
 import uuid from 'uuid';
 import $ from 'jquery';
-import { Grid, Row, Col } from 'react-bootstrap';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       patients: [],
+      title: "Patients"
     }
   }
 
@@ -60,20 +60,35 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <Grid>
+      <div className="container">
+        <div className="row">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">TextMD</h1>
+          <h1 className="App-title">TextMD: Intelligent Texting for Doctors of the Future</h1>
         </header>
-        <Row>
-          <Col md={6}>
+        </div>
+        <hr />
+        <div className="row">
+          <div className="panel panel-primary">
+            <div className="panel-heading patientHeader">
+              <h4>{this.state.title}</h4>
+              <div class="input-group">
+                <label for="category">Select category:</label>
+                <select class="form-control" id="category">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                </select>
+              </div>
+            </div>
+            <div className="panel-body">
             <Patients patients={this.state.patients} />
-          </Col>
-          <Col md={6}>
-            <p>Test</p>
-          </Col>
-        </Row>
-      </Grid>
+            </div>
+          </div>    
+        </div>
+      </div>
+
       </div>
     );
   }
