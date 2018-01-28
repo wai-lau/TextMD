@@ -18,3 +18,8 @@
   .Patient-header {
     text-align: center;
   }
+
+  #cancel {
+      margin-left: 10px;
+      margin-right: 10px;
+  }

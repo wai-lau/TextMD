@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import uuid from 'uuid';
 import $ from 'jquery';
 import './PatientPage.css';
+import { withRouter, Link} from 'react-router-dom';
 
 class PatientPage extends Component {
   constructor() {
@@ -30,6 +30,24 @@ class PatientPage extends Component {
   componentDidMount() {
     console.log(this.state);
   }
+
+  handleSubmit(e){
+    if(this.refs.response.value === '') {
+        alert('A response is required');
+    } else {
+        console.log(this.refs.response.value);
+        this.props.history.push({
+            pathname: '/',
+            state: {
+              id: this.state.patient.id,
+              response: this.refs.response.value
+            }
+        })
+    }
+    e.preventDefault();
+    
+   }
+
 
   render() {
     return (
@@ -60,6 +78,16 @@ class PatientPage extends Component {
                 <dt className="col-sm-3">Description: </dt>
                 <dd className="col-sm-9">{this.state.patient.description}</dd>
             </dl>
+            
+                <div className="form-group">
+                    <label>Response:</label>
+                    <textarea className="form-control" rows="5" id="response" ref="response"></textarea>
+                </div>
+                <div className="btn-group">
+                    <Link to="/"><button className="btn btn-danger" id="cancel" >Cancel</button></Link>
+                    <button className="btn btn-success" onClick={this.handleSubmit.bind(this)}>Submit</button>
+                </div>
+            
             </div>
           </div>    
         </div>
@@ -70,4 +98,4 @@ class PatientPage extends Component {
   }
 }
 
-export default PatientPage;
+export default withRouter(PatientPage);

@@ -10,7 +10,8 @@ class App extends Component {
     super();
     this.state = {
       patients: [],
-      title: "Patients"
+      title: "Patients",
+      categoryList: ["Cardio", "Eye", "Muscle"]
     }
   }
 
@@ -22,7 +23,7 @@ class App extends Component {
         age: 22,
         sex: "Male",
         category: "Healthy",
-        description: "React"
+        description: "React, and the overall everything guy also i am a god"
       },
       {
         id: uuid.v4(),
@@ -45,6 +46,21 @@ class App extends Component {
 
   componentWillMount(){
     this.getPatients();
+    console.log(this.state.categoryList[0]);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location !== this.props.location) {
+      this.setState({ prevPath: this.props.location })
+      console.log(this.props.location.state)
+      if (this.props.location.state) {
+        let patients = this.state.patients;
+        let idToDelete = this.props.location.state.id;
+        let index = patients.findIndex(x => x.id === idToDelete);
+        patients.splice(index, 1);
+        this.setState({patients: patients});
+      }
+    }
   }
 
   componentDidMount() {
@@ -60,7 +76,17 @@ class App extends Component {
     });
   }
 
+  handleCatChange(e) {
+    console.log(e.target.value);
+  }
+
   render() {
+    let categories = this.state.categoryList.map(category => {
+      // console.log(category);
+      return (
+          <option key={category}>{category}</option>
+      );
+    });
     return (
       <div className="App">
       <div className="container">
@@ -77,11 +103,8 @@ class App extends Component {
               <h4>{this.state.title}</h4>
               <div className="input-group">
                 <label>Select category:</label>
-                <select className="form-control" id="category">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
+                <select className="form-control" id="category" onChange={this.handleCatChange.bind(this)}>
+                  {categories}
                 </select>
               </div>
             </div>
