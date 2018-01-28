@@ -1,1 +1,21 @@
 *.pyc
+
+# dependencies
+/fredmd-web/node_modules
+
+# testing
+/fredmd-web/coverage
+
+# production
+/fredmd-web/build
+
+# misc
+fredmd-web/.DS_Store
+fredmd-web/.env.local
+fredmd-web/.env.development.local
+fredmd-web/.env.test.local
+fredmd-web/.env.production.local
+
+fredmd-web/npm-debug.log*
+fredmd-web/yarn-debug.log*
+fredmd-web/yarn-error.log*
