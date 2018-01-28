@@ -21,7 +21,7 @@ def remove(number):
 def get_from_db(number):
     return db.child("patients").child(number).get(user['idToken']).val()
 
-def put_in_db(number, context):
+def put_in_db(number, context, input_):
     entry = {
         'user_info': {
             'name':context['name'],
@@ -29,7 +29,8 @@ def put_in_db(number, context):
             'sex':context['sex']
         },
         'doc_ready':context['doc_ready'],
-        'category':context['category']
+        'category':context['category'],
+        'description':input_
     }
     db.child("patients").child(number).set(entry, user['idToken'])
 
