@@ -38,7 +38,7 @@ class PatientPage extends Component {
         $.ajax({
             type: "POST",
             contentType: 'application/json',
-            url: 'http://localhost:8080/response',
+            url: 'http://www.wailunlau.net:8080/response',
             cache: false,
             data: '{"response": "' + this.refs.response.value.replace(/\s/g,' ') + '", "id" : "' + this.state.patient.id + '"}',
             success: function(data){

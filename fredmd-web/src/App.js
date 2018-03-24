@@ -108,7 +108,7 @@ class App extends Component {
 
   handleCatChange(e) {
     console.log(e.target.value);
-    let url = 'http://localhost:8080/patients/' + this.findCategory(e.target.value);
+    let url = 'http://www.wailunlau.net:8080/patients/' + this.findCategory(e.target.value);
     $.ajax({
       url: url,
       cache: false,
