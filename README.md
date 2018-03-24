@@ -10,6 +10,21 @@ TextMD is a way to communicate with a medical team fast, from the comfort of jus
 # How we built it
 Using Twilio, users can send text messages to our number, where they will meet our friend IBM - Watson. Through a small conversation with Watson, our medical staff will receive all the information we need to make smart and informed diagnoses and treatment suggestion.
 
+# Deployment
+The back end hosting the API endpoints and the front end are hosted on different servers.
+
+To run the back end, run this command in the root directory:
+
+```
+python request.py
+```
+
+To run the front end, run this command in the fredmd-web folder:
+
+```
+yarn start
+```
+
 # Challenges we ran into
 There was an issue with setting up Twilio locally for testing purposes. Then we struggled to get React working in the way we wanted. Through the struggle we managed to tackle both. The last challenge was to connect the output from the Watson conversation to be stored and parsed into a Firebase database.
 
