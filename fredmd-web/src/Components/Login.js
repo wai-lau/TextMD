@@ -16,6 +16,8 @@ class Login extends Component {
   handleSubmit(e){
     let usr = this.refs.usr.value ;
     let pwd = this.refs.pwd.value ;
+    console.log(usr)
+    console.log(pwd)
     if(usr === '') {
         alert('Please enter a username');
     } else if (pwd === '') {

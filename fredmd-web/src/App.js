@@ -27,7 +27,7 @@ class App extends Component {
 
   getCategories() {
     $.ajax({
-      url: 'http://localhost:8080/categories',
+      url: 'http://www.wailunlau.net:8080/categories',
       cache: false,
       success: function(data){
           console.log(data);
@@ -54,7 +54,7 @@ class App extends Component {
   }
 
   getPatients() {
-    let url = 'http://localhost:8080/patients/' + this.state.categoryList[0];
+    let url = 'http://www.wailunlau.net:8080/patients/' + this.state.categoryList[0];
     $.ajax({
       url: url,
       cache: false,
