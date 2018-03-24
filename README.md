@@ -16,7 +16,7 @@ The back end hosting the API endpoints and the front end are hosted on different
 To run the back end, run this command in the root directory:
 
 ```
-python request.py
+python server.py
 ```
 
 To run the front end, run this command in the fredmd-web folder:
